@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Export INO",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy", "Bypass",
+        "-Command",
+        "\"$workspace='${workspaceFolder}';" +
+        "$src=Join-Path $workspace 'src\\main.cpp';" +
+        "$outDir=Join-Path $workspace 'export';" +
+        "New-Item -ItemType Directory -Force -Path $outDir | Out-Null;" +
+        "$dst=Join-Path $outDir '06_LED_Blink_SW.ino';" +
+        "Copy-Item -LiteralPath $src -Destination $dst -Force;" +
+        "Start-Process -FilePath 'explorer.exe' -ArgumentList $outDir\""
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
